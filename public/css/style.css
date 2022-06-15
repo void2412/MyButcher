@@ -1,0 +1,30 @@
+:root {
+  --background: #f7f6f2;
+  --login: #d33f3e;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  max-width: 1024px;
+  margin: auto 200px;
+  min-height: 100vh;
+  background-color: var(--background);
+  font-family: "Cinzel Decorative", cursive;
+}
+
+/* login page styling */
+
+.login-section {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10em;
+  align-items: center;
+  padding: 10px;
+}
+
+.hero-image {
+  font-weight: bolder;
+  font-size: 1em;
+}
