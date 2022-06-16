@@ -1,0 +1,71 @@
+<div class="flex-column justify-space-around">
+  <header class="page-header">
+    <h1>
+      <a href="/"><img
+          src="/images/logo.webp"
+          alt=""
+          height="100px"
+          width="100px"
+        /></a>
+    </h1>
+    <nav>
+      <!-- Conditionally render login or logout links -->
+      <!-- {{#if logged_in}} -->
+          <a href="/">HOME</a>
+
+          <a href="/dashboard">PROFILE</a>
+          <a href="/logout" id="logout">LOGOUT</a>
+
+          <!-- {{else}} -->
+          <a href="/">HOME</a>
+
+          <a href="/login">LOGIN</a>
+          <!-- {{/if}} -->
+    </nav>
+  </header>
+  <main class="sign-up">
+    <!-- Render the signup-->
+    <div class="col-md-6 signup-section">
+      <h2>Signup</h2>
+
+      <form class="form signup-form">
+        <div class="form-group">
+          <label for="name-signup">name:</label>
+          <input class="form-input" type="text" id="name-signup" />
+        </div>
+        <div class="form-group">
+          <label for="email-signup">email:</label>
+          <input class="form-input" type="text" id="email-signup" />
+        </div>
+        <div class="form-group">
+          <label for="password-signup">password:</label>
+          <input class="form-input" type="password" id="password-signup" />
+        </div>
+        <div class="form-group">
+          <label for="phone-signup">phone:</label>
+          <input class="form-input" type="phone" id="phone-signup" />
+        </div>
+        <div class="form-group">
+          <label for="address-signup">address</label>
+          <textarea
+            class="form-input"
+            id="address-signup"
+            name="address-signup"
+            rows="4"
+            cols="50"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            onclick="signupFormHandler(event)"
+          >
+            signup
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <footer></footer>
+</div>
