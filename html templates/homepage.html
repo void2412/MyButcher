@@ -47,7 +47,7 @@
             <input
               type="email"
               class="form-control"
-              id="floatingInput"
+              id="email-login"
               placeholder="name@example.com"
             />
             <label for="floatingInput">Email address</label>
@@ -56,18 +56,23 @@
             <input
               type="password"
               class="form-control"
-              id="floatingPassword"
+              id="password-login"
               placeholder="Password"
             />
-            <label for="floatingPassword">Password</label>
+            <label for="password-login">Password</label>
           </div>
 
-          <button class="w-100 btn btn-lg btn-primary mt-2 mb-2" type="submit">
+          <button
+            class="w-100 btn btn-lg btn-primary mt-2 mb-2"
+            type="submit"
+            onclick="loginFormHandler(event)"
+          >
             Sign in
           </button>
-          <a href="">Create an account</a>
+          <a href="./signup.html">Create an account</a>
         </form>
       </section>
     </div>
   </body>
+  <script src="/public/js/login.js"></script>
 </html>
