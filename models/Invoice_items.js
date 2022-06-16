@@ -39,7 +39,7 @@ Invoice_items.init(
 			allowNull: true
 		},
         note: {
-            type: Datatypes.TEXT,
+            type: DataTypes.TEXT,
 			allowNull: true
         }
 	},
