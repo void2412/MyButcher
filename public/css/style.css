@@ -1,6 +1,6 @@
 :root {
   --background: #f7f6f2;
-  --login: #d33f3e;
+  --button: #980506;
 }
 
 * {
@@ -12,6 +12,9 @@ body {
   min-height: 100vh;
   background-color: var(--background);
   font-family: "Cinzel Decorative", cursive;
+}
+.btn {
+  background-color: var(--button);
 }
 
 /* login page styling */
@@ -27,4 +30,31 @@ body {
 .hero-image {
   font-weight: bolder;
   font-size: 1em;
+}
+
+/* signup page */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.sign-up {
+  width: 100%;
+  margin-top: 3em;
+}
+
+.signup-section {
+  width: 80%;
+  margin: 0 auto;
+}
+input {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 10px;
+}
+textarea {
+  width: 100%;
 }
