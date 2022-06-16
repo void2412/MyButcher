@@ -9,8 +9,8 @@ Item.belongsToMany(Customer,{through:Price})
 
 Invoice.hasMany(Invoice_items,{
 	foreignKey: 'invoice_id',
-	onDelete: 'CASADE',
-	onUpdate: 'CASADE'
+	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE'
 })
 
 Invoice_items.belongsTo(Invoice,{
