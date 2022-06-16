@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection');
+const sequelize = require("../config/connection");
 
 class Invoice_items extends Model {}
 
@@ -52,4 +52,4 @@ Invoice_items.init(
 	}
 )
 
-module.exports = Invoice_items
+module.exports = Invoice_items;
