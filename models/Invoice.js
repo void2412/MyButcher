@@ -2,34 +2,24 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection');
 
-class Invoice_details extends Model {}
+class Invoice extends Model {}
 
 
-Invoice_details.init(
+Invoice.init(
     {
-        invoice_id: {
+        id: {
             type: DataTypes.INTEGER,
             allowNull: false,
 			primaryKey: true,
 			autoIncrement: true
         },
-        item_id: {
-            type: DataTypes.INTEGER,
-			allowNull: false
-        },
 		customer_name:{
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-        quantity: {
-            type: DataTypes.DECIMAL(10,2),
-			allowNull: false,
-			defaultValue: 0
-        },
-		unit_price: {
-			type: DataTypes.DECIMAL(10,2),
-			allowNull: false,
-			defaultValue: 0
+		customer_email:{
+			type: DataTypes.STRING,
+			allowNull: false
 		},
         address: {
             type: DataTypes.TEXT,
@@ -47,14 +37,6 @@ Invoice_details.init(
         	type: DataTypes.DATE,
 			allowNull: true
         },
-        tax_rate: {
-            type: DataTypes.DECIMAL(10,2),
-			allowNull: true
-        },
-		discount:{
-			type: DataTypes.DECIMAL(10,2),
-			allowNull: true
-		},
         note: {
             type: Datatypes.TEXT,
 			allowNull: true
@@ -62,11 +44,11 @@ Invoice_details.init(
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Invoice_details',
+        modelName: 'invoice',
       }
 );
 
-module.exports = Invoice_details
+module.exports = Invoice

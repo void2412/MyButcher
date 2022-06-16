@@ -7,19 +7,29 @@ class Price extends Model {}
 Price.init(
 	{
 		customer_id:{
-			type: DataTypes.STRING,
+			type: DataTypes.INTEGER,
 			allowNull: false,
-			primaryKey: true
+			primaryKey: true,
+			autoIncrement: false,
+			references:{
+				model:'customer',
+				key: 'id'
+			}
 		},
 		item_id : {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			allowNull: false,
-			autoIncrement: false
+			autoIncrement: false,
+			references:{
+				model:'item',
+				key: 'id'
+			}
 		},
 		unit_price: {
 			type: DataTypes.DECIMAL(10,2),
-			allowNull: false
+			allowNull: false,
+			defaultValue: 0
 		}
 	},
 	{
@@ -30,3 +40,5 @@ Price.init(
 		modelName: "price"
 	}
 )
+
+module.exports = Price
