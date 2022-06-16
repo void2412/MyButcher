@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS meat_db;
+CREATE DATABASE meat_db;
