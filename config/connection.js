@@ -10,7 +10,7 @@ else{
 	sequelize = new Sequelize(
 		process.env.db_name,
 		process.env.db_user,
-		process.env.password,
+		process.env.db_password,
 		{
 			host:'localhost',
 			dialect: 'mysql',
