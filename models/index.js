@@ -7,11 +7,12 @@ const Invoice_items = require("./Invoice_items");
 Customer.belongsToMany(Item, { through: Price });
 Item.belongsToMany(Customer, { through: Price });
 
-Invoice.hasMany(Invoice_items, {
-  foreignKey: "invoice_id",
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
-});
+
+Invoice.hasMany(Invoice_items,{
+	foreignKey: 'invoice_id',
+	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE'
+})
 
 Invoice_items.belongsTo(Invoice, {
   foreignKey: "invoice_id",
