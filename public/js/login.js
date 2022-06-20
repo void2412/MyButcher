@@ -9,22 +9,22 @@ const loginFormHandler = async (event) => {
   console.log(email);
   console.log(password);
 
-  //   if (email && password) {
-  //     // Send a POST request to the API endpoint
-  //     const response = await fetch("/api/users/login", {
-  //       method: "POST",
-  //       body: JSON.stringify({ email, password }),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-  //     console.log((await response.json()).user);
+  if (email && password) {
+    // Send a POST request to the API endpoint
+    const response = await fetch("/api/customers/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log((await response.json()).user);
 
-  //     if (response.ok) {
-  //       // If successful, redirect the browser to the profile page
-  //       document.location.replace("/userprofile");
-  //     } else {
-  //       alert(response.statusText);
-  //     }
-  //   }
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace("/userprofile");
+    } else {
+      alert(response.statusText);
+    }
+  }
 };
 
 // function to get the sign up details from the user
@@ -34,21 +34,29 @@ const signupFormHandler = async (event) => {
   const name = document.querySelector("#name-signup").value.trim();
   const email = document.querySelector("#email-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
-  const phone = document.querySelector("#phone-signup").value.trim();
+  const phone1 = document.querySelector("#phone-signup").value.trim();
   const address = document.querySelector("#address-signup").value.trim();
+  const account_type = 1;
+  console.log(name, email, password, phone1, address, account_type);
+  if (name && email && password) {
+    const response = await fetch("/api/customers", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password,
+        name,
+        address,
+        phone1,
+        account_type,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
 
-  //   if (name && email && password) {
-  //     const response = await fetch("/api/users", {
-  //       method: "POST",
-  //       body: JSON.stringify({ name, email, password }),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-
-  //     if (response.ok) {
-  //       document.location.replace("/dashboard");
-  //     } else {
-  //       alert(response.statusText);
-  //     }
-  //   }
-  console.log(name, email, password, phone, address);
+    if (response.ok) {
+      document.location.replace("/userprofile");
+    } else {
+      alert(response.statusText);
+    }
+  }
+  // console.log(name, email, password, phone, address);
 };
