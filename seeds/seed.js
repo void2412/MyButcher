@@ -60,7 +60,8 @@ const seedDb = async ()=>{
 			address: customer[userId].address,
 			phone1: customer[userId].phone1,
 			phone2: customer[userId].phone2,
-			due_date: Date.now()
+			due_date: Date.now(),
+			approve: false
 		}
 
 		invoiceList.push(object)
