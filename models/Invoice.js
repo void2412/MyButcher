@@ -14,7 +14,11 @@ Invoice.init(
         },
 		customer_id:{
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true,
+			references:{
+				model: 'customer',
+				key:'id'
+			}
 		},
 		customer_name:{
 			type: DataTypes.STRING,
@@ -43,7 +47,12 @@ Invoice.init(
         note: {
             type: DataTypes.TEXT,
 			allowNull: true
-        }
+        },
+		approve:{
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
+		}
     },
     {
         sequelize,

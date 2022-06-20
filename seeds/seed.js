@@ -11,11 +11,9 @@ const seedDb = async ()=>{
 		individualHooks:true,
 		returning: true
 	})
-	console.log(customer)
 	const item = await Item.bulkCreate(itemSeed,{
 		returning: true
 	})
-	console.log(item)
 
 	let priceList=[]
 	for (const user of customer){
@@ -60,7 +58,8 @@ const seedDb = async ()=>{
 			address: customer[userId].address,
 			phone1: customer[userId].phone1,
 			phone2: customer[userId].phone2,
-			due_date: Date.now()
+			due_date: Date.now(),
+			approve: false
 		}
 
 		invoiceList.push(object)
@@ -75,7 +74,7 @@ const seedDb = async ()=>{
 	const invoiceItemList = []
 	for (let i = 0; i < 100; i++){
 		let invoiceId = Math.floor(Math.random() * (invoice.length -1) + 1)
-		let customerId = invoice[invoiceId].customer_id
+		let customerId = invoice[invoiceId-1].customer_id
 		let itemIdList =[]
 		for (const y of price){
 			if (y.customerId == customerId && !itemIdList.includes(y.itemId)){

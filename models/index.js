@@ -19,11 +19,23 @@ Invoice_items.belongsTo(Invoice, {
 });
 
 Item.hasMany(Invoice_items,{
-	foreignKey: "item_id"
+	foreignKey: "item_id",
+	onDelete: 'RESTRICT',
+	onUpdate: 'RESTRICT'
 })
 
 Invoice_items.belongsTo(Item, {
-	foreignKey: "item_id",
+	foreignKey: "item_id"
+})
+
+Customer.hasMany(Invoice,{
+	foreignKey: "customer_id",
+	onDelete: 'SET NULL',
+	onUpdate: 'CASCADE'
+})
+
+Invoice.belongsTo(Customer, {
+	foreignKey: "customer_id"
 })
 
 module.exports = {Customer, Item, Price, Invoice, Invoice_items}
