@@ -58,3 +58,9 @@ input {
 textarea {
   width: 100%;
 }
+
+/* user dashboard */
+
+.user-profile {
+  display: flex;
+}
