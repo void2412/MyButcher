@@ -19,7 +19,9 @@ Invoice_items.belongsTo(Invoice, {
 });
 
 Item.hasMany(Invoice_items,{
-	foreignKey: "item_id"
+	foreignKey: "item_id",
+	onDelete: 'RESTRICT',
+	onUpdate: 'RESTRICT'
 })
 
 Invoice_items.belongsTo(Item, {
