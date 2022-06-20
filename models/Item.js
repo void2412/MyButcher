@@ -15,10 +15,7 @@ Item.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    img_name: {
-      type: DataTypes.STRING,
-    },
+    }
   },
   {
     sequelize,

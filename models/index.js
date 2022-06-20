@@ -17,3 +17,5 @@ Invoice.hasMany(Invoice_items,{
 Invoice_items.belongsTo(Invoice, {
   foreignKey: "invoice_id",
 });
+
+module.exports = {Customer, Item, Price, Invoice, Invoice_items}

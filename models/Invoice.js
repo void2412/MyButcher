@@ -12,6 +12,10 @@ Invoice.init(
 			primaryKey: true,
 			autoIncrement: true
         },
+		customer_id:{
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
 		customer_name:{
 			type: DataTypes.STRING,
 			allowNull: false

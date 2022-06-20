@@ -41,6 +41,10 @@ Customer.init(
 		phone2: {
 			type: DataTypes.STRING(15),
 			allowNull: true
+		},
+		account_type: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		}
 	},
 	{
