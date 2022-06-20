@@ -1,0 +1,38 @@
+[
+	{
+		"email": "void2412@gmail.com",
+		"password": "1",
+		"name": "Chi Hieu Nguyen",
+		"address":"Australia",
+		"phone1":"0432 234 234",
+		"phone2":"0432 234 453",
+		"account_type":"1"
+	},
+	{
+		"email": "test@gmail.com",
+		"password": "test",
+		"name": "test nguyen",
+		"address":"Australia",
+		"phone1":"0122 234 234",
+		"phone2":"0452 234 453",
+		"account_type":"1"
+	},
+	{
+		"email": "admin@gmail.com",
+		"password": "admin",
+		"name": "admin nguyen",
+		"address":"Australia",
+		"phone1":"0122 235 234",
+		"phone2":"6452 234 443",
+		"account_type":"0"
+	},
+	{
+		"email": "test2@gmail.com",
+		"password": "test2",
+		"name": "test2 nguyen",
+		"address":"New Zealand",
+		"phone1":"1122 234 234",
+		"phone2":"3452 232 453",
+		"account_type":"1"
+	}
+]
