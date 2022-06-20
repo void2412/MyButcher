@@ -7,6 +7,12 @@ class Customer extends Model {
 	checkPassword(loginPw){
 		return bcrypt.compareSync(loginPw, this.password)
 	}
+	checkAdmin(){
+		if (this.account_type == 0){
+			return true
+		}
+		return false
+	}
 }
 
 Customer.init(

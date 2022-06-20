@@ -43,7 +43,12 @@ Invoice.init(
         note: {
             type: DataTypes.TEXT,
 			allowNull: true
-        }
+        },
+		approve:{
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
+		}
     },
     {
         sequelize,

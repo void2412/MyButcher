@@ -40,10 +40,12 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+	const adminCheck = await customerData.checkAdmin()
+
     req.session.save(() => {
       req.session.user_id = customerData.id;
       req.session.logged_in = true;
-
+	  req.session.admin = adminCheck
       res.json({
         customer: {
           id: customerData.id,
