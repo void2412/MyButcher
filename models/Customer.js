@@ -63,7 +63,7 @@ Customer.init(
 		timestamps: true,
 		freezeTableName: true,
         underscored: true,
-		modelName:'user'
+		modelName:'customer'
 	}
 	)
 module.exports = Customer;
