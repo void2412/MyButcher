@@ -18,4 +18,12 @@ Invoice_items.belongsTo(Invoice, {
   foreignKey: "invoice_id",
 });
 
+Item.hasMany(Invoice_items,{
+	foreignKey: "item_id"
+})
+
+Invoice_items.belongsTo(Item, {
+	foreignKey: "item_id",
+})
+
 module.exports = {Customer, Item, Price, Invoice, Invoice_items}
