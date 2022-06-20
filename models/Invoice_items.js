@@ -20,6 +20,14 @@ Invoice_items.init(
 				key: 'id'
 			}
 		},
+		item_id:{
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			references:{
+				model: 'item',
+				key:'id'
+			}
+		},
 		quantity: {
 			type: DataTypes.DECIMAL(10,2),
 			allowNull: false,
