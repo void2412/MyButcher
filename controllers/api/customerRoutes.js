@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Customer } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // sign up customer
 router.post("/", async (req, res) => {
@@ -17,6 +18,21 @@ router.post("/", async (req, res) => {
   }
 });
 
+// edit existing customers
+
+router.put("/:id", withAuth, async (req, res) => {
+  try {
+    const customerData = await Customer.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.status(200).json(customerData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 // login signed up customer
 router.post("/login", async (req, res) => {
   try {
@@ -40,12 +56,12 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-	const adminCheck = await customerData.checkAdmin()
+    const adminCheck = await customerData.checkAdmin();
 
     req.session.save(() => {
       req.session.customer_id = customerData.id;
       req.session.logged_in = true;
-	  req.session.admin = adminCheck
+      req.session.admin = adminCheck;
       res.json({
         customer: {
           id: customerData.id,
