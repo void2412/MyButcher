@@ -26,10 +26,11 @@ router.post('/', async (req, res) => {
 		const userData = await Customer.findByPk(req.session.customer_id,{
 			attributes:{exclude:['password']}
 		})
-
+		
 		// check admin and set object based on admin status
-		if (userData.checkAdmin()){
-			const object = {
+		let object
+		if (!userData.checkAdmin()){
+			object = {
 				customer_id:req.session.customer_id,
 				customer_name: userData.name,
 				customer_email: userData.email,
@@ -42,7 +43,7 @@ router.post('/', async (req, res) => {
 			}
 		}
 		else{
-			const object = {
+			object = {
 				customer_id:req.session.customer_id,
 				customer_name: userData.name,
 				customer_email: userData.email,
@@ -67,6 +68,7 @@ router.post('/', async (req, res) => {
 				customer_id : req.session.customer_id,
 				item_id: item.id
 			}})
+			console.log(itemPrice)
 			// constructing the item object
 			const itemObject={
 				invoice_id: newInvoice.id,
@@ -91,6 +93,7 @@ router.post('/', async (req, res) => {
 	}
 	catch (err){
 		res.status(400).json(err)
+		console.error(err)
 	}
 })
 
