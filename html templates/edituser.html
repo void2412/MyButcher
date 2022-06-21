@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Bucher</title>
+    <!--Boot strap link-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap"
+      rel="stylesheet"
+    />
+    <!--local css styling-->
+    <link rel="stylesheet" href="/public/css/style.css" />
+  </head>
+  <body class="text-center">
+    <div class="flex-column justify-space-around">
+      <header class="page-header">
+        <h1>
+          <a href="/"
+            ><img
+              src="/public/images/logo.webp"
+              alt=""
+              height="100px"
+              width="100px"
+          /></a>
+        </h1>
+        <nav>
+          <!-- Conditionally render login or logout links -->
+          <!-- {{#if logged_in}} -->
+          <a href="/">HOME</a>
+
+          <a href="/dashboard">PROFILE</a>
+          <a href="/logout" id="logout">LOGOUT</a>
+
+          <!-- {{else}} -->
+          <a href="/">HOME</a>
+
+          <a href="/login">LOGIN</a>
+          <!-- {{/if}} -->
+        </nav>
+      </header>
+      <main class="sign-up">
+        <!-- Render the signup-->
+        <div class="col-md-6 signup-section">
+          <form class="form signup-form">
+            <div class="form-group">
+              <label for="name-signup">name:</label>
+              <input class="form-input" type="text" id="name-signup" />
+            </div>
+            <div class="form-group">
+              <label for="email-signup">email:</label>
+              <input class="form-input" type="text" id="email-signup" />
+            </div>
+            <div class="form-group">
+              <label for="password-signup">password:</label>
+              <input class="form-input" type="password" id="password-signup" />
+            </div>
+            <div class="form-group">
+              <label for="phone-signup">phone:</label>
+              <input class="form-input" type="phone" id="phone-signup" />
+            </div>
+            <div class="form-group">
+              <label for="address-signup">address</label>
+              <textarea
+                class="form-input"
+                id="address-signup"
+                name="address-signup"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                onclick="signupFormHandler(event)"
+              >
+                save
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+  <script src="/public/js/login.js"></script>
+</html>

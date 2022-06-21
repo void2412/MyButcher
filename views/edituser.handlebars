@@ -1,0 +1,89 @@
+<div class="flex-column justify-space-around">
+  <header class="page-header">
+    <h1>
+      <a href="/"><img
+          src="/images/logo.webp"
+          alt=""
+          height="100px"
+          width="100px"
+        /></a>
+    </h1>
+    <nav>
+      <!-- Conditionally render login or logout links -->
+      <!-- {{#if logged_in}} -->
+          <a href="/">HOME</a>
+
+          <a href="/userprofile">PROFILE</a>
+          <a href="/logout" id="logout">LOGOUT</a>
+
+          <!-- {{else}} -->
+          <a href="/">HOME</a>
+
+          <a href="/login">LOGIN</a>
+          <!-- {{/if}} -->
+    </nav>
+  </header>
+
+<main class="sign-up">
+  <!-- Render the signup-->
+  <div class="col-md-6 signup-section">
+    <form class="form signup-form">
+      <div class="form-group">
+        <label for="name-signup">name:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="name-edit"
+          value="{{customer.name}}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email-signup">email:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="email-edit"
+          value="{{customer.email}}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone-signup">phone:</label>
+        <input
+          class="form-input"
+          type="phone"
+          id="phone1-edit"
+          value="{{customer.phone1}}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone-signup">Mobile:</label>
+        <input
+          class="form-input"
+          type="phone"
+          id="phone2-edit"
+          value="{{customer.phone2}}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address-signup">address</label>
+        <textarea
+          class="form-input"
+          id="address-edit"
+          name="address-signup"
+          rows="4"
+          cols="50"
+        >{{customer.address}}</textarea>
+      </div>
+      <div class="form-group">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          onclick="saveCustomerDetails(event)"
+        >
+          save
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

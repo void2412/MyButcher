@@ -39,7 +39,19 @@ router.get("/userprofile", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// add edit user route
+router.get("/edit-profile/:id", async (req, res) => {
+  try {
+    const customerData = await Customer.findByPk(req.params.id);
 
+    const customer = customerData.get({ plain: true });
+    console.log(customer);
+
+    res.render("edituser", { customer, logged_in: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 // add login route
 
 router.get("/login", (req, res) => {
