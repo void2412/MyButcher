@@ -5,6 +5,17 @@ const {Customer, Invoice, Invoice_items, Item, Price} = require('../models')
 const customerSeed = require('./customer.json')
 const itemSeed = require('./item.json')
 
+
+const checkExist = (array, key, value)=>{
+	for(const object of array){
+		if (object[key] == value){
+			return true
+		}
+	}
+	return false
+}
+
+
 const seedDb = async ()=>{
 	await sequelize.sync({force: true})
 	const customer = await Customer.bulkCreate(customerSeed,{
@@ -48,9 +59,16 @@ const seedDb = async ()=>{
 	let invoiceList=[]
 	for (let i=0; i<20;i++){
 		let userId = Math.floor(Math.random()*(customer.length -1) + 1)
-		while(customer[userId].account_type == 0){
+		
+		while(!checkExist(price, 'customerId', userId)){
 			userId = Math.floor(Math.random()*(customer.length -1) + 1)
+			while(customer[userId].account_type == 0){
+				userId = Math.floor(Math.random()*(customer.length -1) + 1)
+			}
 		}
+		
+		
+
 		let object = {
 			customer_id: userId,
 			customer_name: customer[userId].name,
@@ -81,7 +99,11 @@ const seedDb = async ()=>{
 				itemIdList.push(y.itemId)
 			}
 		}
-
+		if(itemIdList.length <= 0){
+			console.error("item Id List empty")
+			return
+		}
+			
 		let itemId =itemIdList[Math.floor(Math.random() * (itemIdList.length - 1) + 1)]
 
 
