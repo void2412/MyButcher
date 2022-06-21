@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Item, Price, Customer } = require("../models");
+const { Item, Price, Customer, Invoice, Invoice_items } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
@@ -25,7 +25,7 @@ router.get("/userprofile", withAuth, async (req, res) => {
     // find the logged in customer based on the session id
     const customerData = await Customer.findByPk(req.session.customer_id, {
       attributes: { exclude: ["password"] },
-      include: [{ model: Item }],
+      include: [{ model: Invoice }],
     });
 
     const customer = customerData.get({ plain: true });
