@@ -54,17 +54,20 @@ router.post('/', async (req, res) => {
 				approve: req.body.approve
 			}
 		}
-		
+		// createing invoice
 		const newInvoice = await Invoice.create(object,{returning:true});
-		const invoice_items = req.body.invoice_items
 
+		// creating invoice items
+		const invoice_items = req.body.invoice_items
 		
 		for(const item of invoice_items){
+			// grabbing data
 			let itemData = await Item.findByPk(item.id)
 			let itemPrice = await Price.findOne({where:{
 				customer_id : req.session.customer_id,
 				item_id: item.id
 			}})
+			// constructing the item object
 			const itemObject={
 				invoice_id: newInvoice.id,
 				item_id: item.id,
@@ -74,6 +77,8 @@ router.post('/', async (req, res) => {
 				tax_rate: itemData.tax_rate,
 				discount: itemPrice.discount
 			}
+
+			// adding to database
 			const newInvoiceItems = await Invoice_items.create(itemObject,{returning:true});
 
 			if(!newInvoiceItems){
@@ -89,16 +94,6 @@ router.post('/', async (req, res) => {
 	}
 })
 
-
-// update order
-router.put('/:invoice_id', async (req, res) => {
-	try{
-
-	}
-	catch (err){
-		res.status(400).json(err)
-	}
-})
 
 // delete order
 
