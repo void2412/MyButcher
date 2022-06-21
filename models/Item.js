@@ -15,7 +15,12 @@ Item.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+	tax_rate:{
+		type: DataTypes.DECIMAL(10,2),
+		allowNull: false,
+		defaultValue: 0
+	}
   },
   {
     sequelize,

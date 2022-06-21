@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Customer, Invoice, Invoice_items}= require("../../models")
+const {Customer, Invoice, Invoice_items, Item, Price} = require("../../models")
 
 // get routes for debugging purposes
 
@@ -54,9 +54,34 @@ router.post('/', async (req, res) => {
 				approve: req.body.approve
 			}
 		}
+		
+		const newInvoice = await Invoice.create(object,{returning:true});
+		const invoice_items = req.body.invoice_items
 
-		const newInvoice = await Invoice.create(object)
+		
+		for(const item of invoice_items){
+			let itemData = await Item.findByPk(item.id)
+			let itemPrice = await Price.findOne({where:{
+				customer_id : req.session.customer_id,
+				item_id: item.id
+			}})
+			const itemObject={
+				invoice_id: newInvoice.id,
+				item_id: item.id,
+				quantity: item.quantity,
+				note: item.note,
+				unit_price: itemPrice.unit_price,
+				tax_rate: itemData.tax_rate,
+				discount: itemPrice.discount
+			}
+			const newInvoiceItems = await Invoice_items.create(itemObject,{returning:true});
 
+			if(!newInvoiceItems){
+				res.status(500).send('An error occurred while creating the invoice')
+				return
+			}
+		}
+		
 		res.status(200).json(newInvoice)
 	}
 	catch (err){
@@ -66,14 +91,32 @@ router.post('/', async (req, res) => {
 
 
 // update order
-router.put('/:id', async (req, res) => {
+router.put('/:invoice_id', async (req, res) => {
+	try{
 
+	}
+	catch (err){
+		res.status(400).json(err)
+	}
 })
 
 // delete order
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:invoice_id', async (req, res) => {
+	try{
+		const invoiceData = await Invoice.destroy({
+			where: {invoice_id: req.params.invoice_id}
+		})
 
+		if(!invoiceData){
+			res.status(400).json(err)
+		}
+
+		res.status(200).json(invoiceData)
+	}
+	catch(err){
+		res.status(400).json(err)
+	}
 })
 
 
