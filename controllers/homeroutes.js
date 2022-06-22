@@ -52,6 +52,25 @@ router.get("/edit-profile/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// add order routes
+
+router.get("/orders/:id", async (req, res) => {
+  try {
+    const customerData = await Customer.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Invoice }],
+    });
+
+    const customer = customerData.get({ plain: true });
+    const customerInvoices = customer.invoices;
+
+    res.render("orders", { customer, logged_in: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // add login route
 
 router.get("/login", (req, res) => {

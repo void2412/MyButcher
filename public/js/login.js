@@ -103,3 +103,12 @@ const saveCustomerDetails = async (event) => {
     }
   }
 };
+
+// function to redirect page to the customers order's route
+
+const goToOrderPage = (event) => {
+  event.preventDefault();
+  id = event.target.getAttribute("data-id");
+
+  document.location.replace(`/orders/${id}`);
+};
