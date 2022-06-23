@@ -26,23 +26,43 @@
 
   <main class="order">
 
-	<form class="orderForm">
+	<form class="orderForm container">
 		{{!-- Render list of items --}}
-		<div class="container">
+		<div>
 			{{!-- Render header --}}
 			<div class="row">
-				<div class="col-3 text-center itemName">Item Name</div>
-				<div class="col text-center itemQuantity">Quantity</div>
-				<div class="col text-center itemPrice">Unit Price</div>
-				<div class="col text-center itemDiscount">Discount</div>
-				<div class="col text-center itemTaxRate">Tax Rate</div>
-				<div class="col text-center itemTotal">Item Total</div>
+				<div class="col-3 text-center">Item Name</div>
+				<div class="col text-center">Quantity</div>
+				<div class="col text-center">Unit Price</div>
+				<div class="col text-center">Discount</div>
+				<div class="col text-center">Tax Rate</div>
+				<div class="col text-center">Item Note</div>
+				<div class="col text-center">Item Total</div>
 			</div>
 			<hr>
     		<!-- Render the items-->
     		{{#each price as |item|}}
 				{{> items}}
 			{{/each}}
+		</div>
+		<hr>
+		<div id="total" class="text-end px-5">
+			<p class="mx-3">Total: $<span id="totalText">0</span></p>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col">
+				<div class="input-group">
+					<input type="date" class="form-control" id="dueDateInput" >
+					<div class="input-group-append"><span class="input-group-text">Due Date</span></div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="input-group input-group-sm">
+					<span class="input-group-text">Invoice Note</span>
+					<textarea id="invoiceNoteInput" class="form-control"></textarea>
+				</div>
+			</div>
 		</div>
 
 		{{!-- Render button to order --}}
@@ -54,5 +74,5 @@
 	</form>
   </main>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="/js/order.js"></script>

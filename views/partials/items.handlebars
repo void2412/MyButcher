@@ -5,8 +5,10 @@
 		<div class="input-group-append"><span class="input-group-text">kg</span></div>
 		
 	</div>
-	<div class="col text-center itemPrice">${{unit_price}}</div>
-	<div class="col text-center itemDiscount">{{discount}}%</div>
-	<div class="col text-center itemTaxRate">{{tax_rate}}%</div>
-	<div class="col text-center itemTotal">$0</div>
+	<div class="col text-center"><span class="text-center">$</span><span class="itemPrice text-center">{{unit_price}}</span></div>
+	<div class="col text-center"><span class="itemDiscount">{{discount}}</span><span>%</span></div>
+	<div class="col text-center"><span class="itemTaxRate">{{tax_rate}}</span><span></span></div>
+	<div class="col text-center"><input class="form-control" id="itemNoteInput"></div>
+	<div class="col text-center"><span>$</span><span class="itemTotal">0</span></div>
+	
 </div>
