@@ -1,0 +1,14 @@
+<div class="row itemRow" item-id="{{item_id}}">
+	<div class="col-3 itemName">{{item_name}}</div>
+	<div class="col itemQuantity text-end input-group">
+		<input class="text-end form-control" type="number" id="quantityInput" min="0"></input>
+		<div class="input-group-append"><span class="input-group-text">kg</span></div>
+		
+	</div>
+	<div class="col text-center"><span class="text-center">$</span><span class="itemPrice text-center">{{unit_price}}</span></div>
+	<div class="col text-center"><span class="itemDiscount">{{discount}}</span><span>%</span></div>
+	<div class="col text-center"><span class="itemTaxRate">{{tax_rate}}</span><span></span></div>
+	<div class="col text-center"><input class="form-control" id="itemNoteInput"></div>
+	<div class="col text-center"><span>$</span><span class="itemTotal">0</span></div>
+	
+</div>

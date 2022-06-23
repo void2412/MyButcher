@@ -1,13 +1,14 @@
 :root {
   --background: #f7f6f2;
   --button: #980506;
+  --buttonSecondary:#6c757d;
 }
 
 * {
   box-sizing: border-box;
 }
 body {
-  max-width: 1024px;
+
   margin: auto 200px;
   min-height: 100vh;
   background-color: var(--background);
@@ -17,6 +18,9 @@ body {
   background-color: var(--button);
 }
 
+.btnCancel{
+	background-color: var(--buttonSecondary);
+}
 /* login page styling */
 
 .login-section {

@@ -19,11 +19,9 @@ const checkExist = (array, key, value)=>{
 const seedDb = async ()=>{
 	await sequelize.sync({force: true})
 	const customer = await Customer.bulkCreate(customerSeed,{
-		individualHooks:true,
-		returning: true
+		individualHooks:true
 	})
 	const item = await Item.bulkCreate(itemSeed,{
-		returning: true
 	})
 
 	let priceList=[]
@@ -52,7 +50,6 @@ const seedDb = async ()=>{
 	}
 	console.log('Adding price to db')
 	const price = await Price.bulkCreate(priceList,{
-		returning: true
 	})
 	console.log('Finished adding price')
 

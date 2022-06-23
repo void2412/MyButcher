@@ -110,5 +110,5 @@ const goToOrderPage = (event) => {
   event.preventDefault();
   id = event.target.getAttribute("data-id");
 
-  document.location.replace(`/orders/${id}`);
+  document.location.replace(`/orders`);
 };

@@ -42,7 +42,8 @@ Invoice.init(
 		},
         due_date: {
         	type: DataTypes.DATE,
-			allowNull: true
+			allowNull: true,
+			defaultValue:DataTypes.NOW
         },
         note: {
             type: DataTypes.TEXT,
