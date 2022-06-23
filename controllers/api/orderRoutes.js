@@ -1,22 +1,6 @@
 const router = require("express").Router();
 const {Customer, Invoice, Invoice_items, Item, Price} = require("../../models")
 
-// get route for displaying items
-
-router.get('/', async (req, res) => {
-	
-	
-})
-
-// get route for debugger
-router.get('/:id', async (req, res) => {
-	const invoiceData = await Invoice.findByPk(req.params.id,{
-		include:{model: Invoice_items}
-	})
-	const invoice = invoiceData.get({plain:true})
-	res.json(invoice)
-})
-
 
 // add new order
 router.post('/', async (req, res) => {
@@ -24,7 +8,6 @@ router.post('/', async (req, res) => {
 		const userData = await Customer.findByPk(req.session.customer_id,{
 			attributes:{exclude:['password']}
 		})
-		
 		// check admin and set object based on admin status
 		let object
 		if (!userData.checkAdmin()){
@@ -35,7 +18,7 @@ router.post('/', async (req, res) => {
 				address: userData.address,
 				phone1: userData.phone1,
 				phone2: userData.phone2,
-				due_date: req.body.due_date,
+				due_date: req.body.due_date||null,
 				note: req.body.note,
 				approve: false
 			}
@@ -66,7 +49,6 @@ router.post('/', async (req, res) => {
 				customer_id : req.session.customer_id,
 				item_id: item.id
 			}})
-			console.log(itemPrice)
 			// constructing the item object
 			const itemObject={
 				invoice_id: newInvoice.id,
