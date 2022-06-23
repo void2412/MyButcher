@@ -99,9 +99,4 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// add logout route
-
-router.get("/logout", withAuth, (req, res) => {
-  res.redirect("/");
-});
 module.exports = router;
