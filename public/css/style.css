@@ -1,6 +1,7 @@
 :root {
   --background: #f7f6f2;
   --button: #980506;
+  --buttonSecondary:#6c757d;
 }
 
 * {
@@ -17,6 +18,9 @@ body {
   background-color: var(--button);
 }
 
+.btnCancel{
+	background-color: var(--buttonSecondary);
+}
 /* login page styling */
 
 .login-section {

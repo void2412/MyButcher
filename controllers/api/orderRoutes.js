@@ -1,16 +1,14 @@
 const router = require("express").Router();
 const {Customer, Invoice, Invoice_items, Item, Price} = require("../../models")
 
-// get routes for debugging purposes
+// get route for displaying items
 
 router.get('/', async (req, res) => {
-	const invoiceData = await Invoice.findAll({
-		include:{model: Invoice_items}
-	})
-	const invoice = invoiceData.map((inv)=>inv.get({plain:true}))
-	res.json(invoice)
+	
+	
 })
 
+// get route for debugger
 router.get('/:id', async (req, res) => {
 	const invoiceData = await Invoice.findByPk(req.params.id,{
 		include:{model: Invoice_items}

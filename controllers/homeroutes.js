@@ -4,6 +4,10 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
+	if(req.session.customer_id){
+		res.redirect("/userprofile")
+		return
+	}
     res.render("homepage");
   } catch (err) {
     res.status(500).json(err);
@@ -40,7 +44,7 @@ router.get("/userprofile", withAuth, async (req, res) => {
   }
 });
 // add edit user route
-router.get("/edit-profile/:id", async (req, res) => {
+router.get("/edit-profile/:id", withAuth, async (req, res) => {
   try {
     const customerData = await Customer.findByPk(req.params.id);
 
@@ -55,20 +59,33 @@ router.get("/edit-profile/:id", async (req, res) => {
 
 // add order routes
 
-router.get("/orders/:id", async (req, res) => {
-  try {
-    const customerData = await Customer.findByPk(req.params.id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Invoice }],
-    });
+router.get("/orders", withAuth, async (req, res) => {
+	try{
+		if(!req.session.customer_id){
+			res.status(401).send('Unauthorized')
+			return
+		}
+		const priceData = await Price.findAll({
+			where: {
+				customer_id: req.session.customer_id
+			}
+		})
+		const price = priceData.map((inv)=>inv.get({plain:true}))
 
-    const customer = customerData.get({ plain: true });
-    const customerInvoices = customer.invoices;
+		for(let item of price){
+			const itemData = await Item.findByPk(item.item_id)
+			item.tax_rate = itemData.tax_rate
+			item.item_name = itemData.name
+		}
 
-    res.render("orders", { customer, logged_in: true });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+		res.render('orders', {
+			logged_in: true,
+			price
+		})
+	}
+	catch (err) {
+		res.status(500).json(err)
+	}
 });
 
 // add login route
@@ -84,7 +101,7 @@ router.get("/login", (req, res) => {
 
 // add logout route
 
-router.get("/logout", (req, res) => {
+router.get("/logout", withAuth, (req, res) => {
   res.redirect("/");
 });
 module.exports = router;
