@@ -1,25 +1,30 @@
 :root {
   --background: #f7f6f2;
   --button: #980506;
-  --buttonSecondary:#6c757d;
+  --buttonSecondary: #6c757d;
 }
 
 * {
   box-sizing: border-box;
 }
 body {
-
   margin: auto 200px;
   min-height: 100vh;
   background-color: var(--background);
-  font-family: "Cinzel Decorative", cursive;
+  font-family: "Open Sans", sans-serif;
 }
 .btn {
   background-color: var(--button);
 }
 
-.btnCancel{
-	background-color: var(--buttonSecondary);
+.btnCancel {
+  background-color: var(--buttonSecondary);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  margin-right: 5px;
 }
 /* login page styling */
 
@@ -67,4 +72,11 @@ textarea {
 
 .user-profile {
   display: flex;
+  width: 100%;
+}
+
+/* invoice view*/
+
+.invoice {
+  margin: auto;
 }
