@@ -46,7 +46,6 @@ const handleSubmit= async (event)=>{
 		let itemObj ={
 			id: parseInt($(item).attr('item-id')),
 			quantity: parseInt($(item).children('.itemQuantity').children('#quantityInput').val()),
-			note: $($(item).children()[5]).children('#itemNoteInput').val()
 		}
 		
 		if(itemObj.quantity >0){

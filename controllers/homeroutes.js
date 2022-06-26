@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { Item, Price, Customer, Invoice, Invoice_items } = require("../models");
 const withAuth = require("../utils/auth");
+const getDocumentData = require("../utils/pdfMaker")
+const {getItemTotal} = require("../utils/helpers")
 
 router.get("/", async (req, res) => {
   try {
@@ -106,18 +108,49 @@ router.get("/invoice/:id", withAuth, async (req, res) => {
       where: {
         invoice_id: req.params.id,
       },
+	  include:[{model: Item}]
     });
     const invoiceItems = invoiceItemsData.map((inv) =>
       inv.get({ plain: true })
     );
 
-    console.log(invoiceItems);
+	let total =0
+	for (const item of invoiceItems) {
+		let itemTotal = getItemTotal(item.unit_price, item.quantity, item.discount)
+		total += itemTotal
+	}
 
-    res.render("invoice", { invoice, invoiceItems, logged_in: true });
+
+    res.render("invoice", { invoice, invoiceItems, logged_in: true, total: total });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+// get pdf file by invoice id
+router.post("/invoice/pdf/:id", withAuth, async (req, res)=>{
+	try{
+		const invoiceData = await Invoice.findByPk(req.params.id,{
+			include:[{model: Invoice_items, include:[{model: Item, attributes:['name']}]}]
+		})
+		
+		if(req.session.customer_id != invoiceData.customer_id){
+			res.status(401).json({message:'Unauthorized'})
+			return
+		}
+
+		const plainInvoiceData = invoiceData.get({plain:true})
+		delete plainInvoiceData.customer_id
+		
+		var file = getDocumentData(plainInvoiceData)
+		res.status(200).send(file)
+	}
+	catch (err) {
+		res.status(500).json(err)
+	}
+})
+
+
 // add login route
 
 router.get("/login", (req, res) => {
@@ -128,5 +161,7 @@ router.get("/login", (req, res) => {
 
   res.render("homepage");
 });
+
+
 
 module.exports = router;

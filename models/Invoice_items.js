@@ -45,11 +45,7 @@ Invoice_items.init(
 		discount:{
 			type: DataTypes.DECIMAL(10,2),
 			allowNull: true
-		},
-        note: {
-            type: DataTypes.TEXT,
-			allowNull: true
-        }
+		}
 	},
 	{
 		sequelize,
