@@ -1,3 +1,7 @@
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
 const handleValueChange = function() {
 	$('.itemQuantity').each(function(){
 		var element = $(this)
@@ -16,6 +20,7 @@ const handleValueChange = function() {
 				let unit_price = parseFloat($(element.parent().children()[2]).children('.itemPrice').text())
 				let discount = parseFloat($(element.parent().children()[3]).children('.itemDiscount').text())
 				let itemTotal = quantity * (unit_price - discount*unit_price/100)
+				itemTotal=roundToTwo(itemTotal)
 				$(element.parent().children()[5]).children('.itemTotal').text(itemTotal)
 			}
 			$('#totalText').text(getTotal())
