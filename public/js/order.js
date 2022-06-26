@@ -12,11 +12,11 @@ const handleValueChange = function() {
 			if(element.data('oldVal') != element.children('#quantityInput').val()){
 				element.data('oldVal', element.val())
 
-				let quantity = parseInt(element.children('#quantityInput').val())
-				let unit_price = parseInt($(element.parent().children()[2]).children('.itemPrice').text())
-				let discount = parseInt($(element.parent().children()[3]).children('.itemDiscount').text())
+				let quantity = parseFloat(element.children('#quantityInput').val())
+				let unit_price = parseFloat($(element.parent().children()[2]).children('.itemPrice').text())
+				let discount = parseFloat($(element.parent().children()[3]).children('.itemDiscount').text())
 				let itemTotal = quantity * (unit_price - discount*unit_price/100)
-				$(element.parent().children()[6]).children('.itemTotal').text(itemTotal)
+				$(element.parent().children()[5]).children('.itemTotal').text(itemTotal)
 			}
 			$('#totalText').text(getTotal())
 
@@ -29,7 +29,7 @@ const getTotal = function () {
 	var itemTotals = $('.itemTotal')
 
 	for (const item of itemTotals) {
-		sum += parseInt($(item).text())
+		sum += parseFloat($(item).text())
 	}
 
 	return sum
@@ -45,7 +45,7 @@ const handleSubmit= async (event)=>{
 	for (const item of iterator){
 		let itemObj ={
 			id: parseInt($(item).attr('item-id')),
-			quantity: parseInt($(item).children('.itemQuantity').children('#quantityInput').val()),
+			quantity: parseFloat($(item).children('.itemQuantity').children('#quantityInput').val()),
 		}
 		
 		if(itemObj.quantity >0){
