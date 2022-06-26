@@ -36,7 +36,7 @@ const getTotal = function () {
 	for (const item of itemTotals) {
 		sum += parseFloat($(item).text())
 	}
-
+	sum = roundToTwo(sum)
 	return sum
 }
 
