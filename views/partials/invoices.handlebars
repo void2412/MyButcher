@@ -2,5 +2,9 @@
   class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
 >
   <h6 class="mb-0">Invoice # {{id}} - {{format_date due_date}}</h6>
-  <button class="btn btn-primary">generate pdf</button>
+  <button
+    class="btn btn-primary"
+    onclick="goToPdfPage(event)"
+    data-id={{id}}
+  >show invoice</button>
 </li>

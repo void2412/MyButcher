@@ -112,3 +112,13 @@ const goToOrderPage = (event) => {
 
   document.location.replace(`/orders`);
 };
+
+// function to redirect to the pdf html view
+
+const goToPdfPage = (event) => {
+  event.preventDefault();
+
+  invoiceId = event.target.getAttribute("data-id");
+
+  document.location.replace(`/invoice/${invoiceId}`);
+};
