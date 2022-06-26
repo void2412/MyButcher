@@ -19,30 +19,33 @@ const checkExist = (array, key, value)=>{
 const seedDb = async ()=>{
 	await sequelize.sync({force: true})
 	const customer = await Customer.bulkCreate(customerSeed,{
-		individualHooks:true
+		individualHooks:true,
+		returning: true
 	})
 	const item = await Item.bulkCreate(itemSeed,{
+		returning: true
 	})
 
 	let priceList=[]
 	for (const user of customer){
 		if(user.account_type != 0){
-			let amountOfItem = Math.floor(Math.random()*(item.length-1) + 1)
+			let amountOfItem = Math.floor(Math.random()*item.length + 1)
 			let usedItem =[]
 			for (let i=0; i<amountOfItem; i++){
 	
-				let itemId = Math.floor(Math.random()*(item.length-1) + 1)
+				let itemId = Math.floor(Math.random()*item.length + 1)
 
 				while(usedItem.includes(itemId)){
-					itemId = Math.floor(Math.random()*(item.length-1) + 1)
+					itemId = Math.floor(Math.random()*item.length + 1)
 					console.log('duplicate')
 				}
 				usedItem.push(itemId)
 			
+				const itemData = await Item.findByPk(itemId)
 				var object ={
 					"customer_id": user.id,
-					"item_id": item[itemId].id,
-					"unit_price": Math.floor(Math.random()*14 + 6)
+					"item_id":itemData.id,
+					"unit_price": Math.floor(Math.random()*15 + 6)
 				}
 				priceList.push(object)
 			}
@@ -50,29 +53,32 @@ const seedDb = async ()=>{
 	}
 	console.log('Adding price to db')
 	const price = await Price.bulkCreate(priceList,{
+		returning: true
 	})
 	console.log('Finished adding price')
 
+
+
 	let invoiceList=[]
 	for (let i=0; i<20;i++){
-		let userId = Math.floor(Math.random()*(customer.length -1) + 1)
+		let userId = Math.floor(Math.random()*customer.length + 1)
 		
 		while(!checkExist(price, 'customerId', userId)){
-			userId = Math.floor(Math.random()*(customer.length -1) + 1)
-			while(customer[userId].account_type == 0){
-				userId = Math.floor(Math.random()*(customer.length -1) + 1)
+			userId = Math.floor(Math.random()*customer.length + 1)
+			while(customer[userId-1].account_type == 0){
+				userId = Math.floor(Math.random()*customer.length + 1)
 			}
 		}
 		
-		
+		const userData = await Customer.findByPk(userId)
 
 		let object = {
 			customer_id: userId,
-			customer_name: customer[userId].name,
-			customer_email: customer[userId].email,
-			address: customer[userId].address,
-			phone1: customer[userId].phone1,
-			phone2: customer[userId].phone2,
+			customer_name: userData.name,
+			customer_email: userData.email,
+			address: userData.address,
+			phone1: userData.phone1,
+			phone2: userData.phone2,
 			due_date: Date.now(),
 			approve: false
 		}
@@ -88,7 +94,7 @@ const seedDb = async ()=>{
 
 	const invoiceItemList = []
 	for (let i = 0; i < 100; i++){
-		let invoiceId = Math.floor(Math.random() * (invoice.length -1) + 1)
+		let invoiceId = Math.floor(Math.random() * invoice.length + 1)
 		let customerId = invoice[invoiceId-1].customer_id
 		let itemIdList =[]
 		for (const y of price){
@@ -101,7 +107,7 @@ const seedDb = async ()=>{
 			return
 		}
 			
-		let itemId =itemIdList[Math.floor(Math.random() * (itemIdList.length - 1) + 1)]
+		let itemId =itemIdList[Math.floor(Math.random() * itemIdList.length)]
 
 
 		let unit_price
