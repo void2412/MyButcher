@@ -4,7 +4,7 @@ module.exports = {
     try {
       return date.toLocaleDateString();
     } catch (err) {
-      return "Not Specified";
+      return "Not Specified Date";
     }
   },
   now: () => {

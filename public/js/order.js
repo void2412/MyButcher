@@ -71,8 +71,8 @@ const handleSubmit= async (event)=>{
 	})
 
 	if (response.ok){
-		// TODO:generate pdf then open that pdf
-		alert("Success")
+		let data = await response.json()
+		document.location.replace(`/invoice/${data.id}`)
 	}
 	else{
 		$('#modalLabel').text('Error')

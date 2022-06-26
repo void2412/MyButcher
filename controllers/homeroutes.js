@@ -89,11 +89,18 @@ router.get("/orders", withAuth, async (req, res) => {
 
 // get invoice details by it's id
 
-router.get("/invoice/:id", async (req, res) => {
+router.get("/invoice/:id", withAuth, async (req, res) => {
   try {
+
     const invoiceData = await Invoice.findByPk(req.params.id);
+	
+	if (invoiceData.customer_id != req.session.customer_id) {
+		res.status(401).redirect('/')
+		return
+	}
+
     const invoice = invoiceData.get({ plain: true });
-    console.log(invoice);
+    
 
     const invoiceItemsData = await Invoice_items.findAll({
       where: {
@@ -119,7 +126,7 @@ router.get("/login", (req, res) => {
     return;
   }
 
-  res.render("login");
+  res.render("homepage");
 });
 
 module.exports = router;
