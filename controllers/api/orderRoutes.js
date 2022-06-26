@@ -2,36 +2,6 @@ const router = require("express").Router();
 const {Customer, Invoice, Invoice_items, Item, Price} = require("../../models")
 const auth = require("../../utils/auth")
 
-router.get("/:invoice_id", auth, async (req, res) => {
-	try{
-		// authorization
-		var invoiceData = Invoice.findByPk(req.params.invoice_id)
-		let authorized = false
-		if(req.session.admin ||req.session.customer_id == invoiceData.customer_id ) {
-			authorized = true
-		}
-
-		if (!authorized) {
-			res.status(401).send('Unauthorized')
-			return
-		}
-
-		// generating document
-		var docDefinition = {}
-		var fonts = {
-		
-		}
-
-
-		// sending document data
-	}
-	catch (err) {
-		res.status(500).send(err)
-	}
-})
-
-
-
 // add new order
 router.post('/', async (req, res) => {
 	try{

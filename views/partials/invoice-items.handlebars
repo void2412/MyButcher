@@ -1,7 +1,7 @@
 <tr>
-  <td>
-    {{item_id}}
-  </td>
-  <td class="text-center">{{quantity}}</td>
+  <td>{{item.name}}</td>
   <td class="text-center">${{unit_price}}</td>
+  <td class="text-center">{{quantity}}</td>
+  <td class="text-center">{{discount}}%</td>
+  <td class="text-center">${{getItemTotal unit_price quantity discount}}</td>
 </tr>

@@ -58,7 +58,7 @@
               <div class="invoice-details mt25">
                 <div class="well">
                   <ul class="list-unstyled mb0">
-                    <li><strong>Invoice</strong> # {{invoice.id}}</li>
+                    <li id="invoiceId" data-id="{{invoice.id}}"><strong>Invoice</strong> # {{invoice.id}}</li>
                     <li>
                       <strong>Invoice Date:</strong>
                       {{format_date invoice.createdAt}}
@@ -90,9 +90,11 @@
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th class="per70 text-center">Description</th>
-                        <th class="per5 text-center">Qty</th>
-                        <th class="per25 text-center">Total</th>
+                        <th class="per55 text-center">Description</th>
+						<th class="text-center">Price per kg</th>
+                        <th class="text-center">Qty (kg)</th>
+						<th class="text-center">Discount</th>
+                        <th class="text-center">Item Total</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -105,8 +107,8 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th colspan="2" class="text-right">Sub Total:</th>
-                        <th class="text-center">$237.00</th>
+                        <th colspan="4" class="text-end">Total Amount:</th>
+                        <th class="text-center">${{total}}</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -115,10 +117,8 @@
               <div class="invoice-footer mt25">
                 <p class="text-center">
                   Generated on {{now}} <br><br>
-                  <a href="#" class="btn btn-default ml15"><i
-                      class="fa fa-print mr5"
-                    ></i>
-                    Print</a>
+                  <button class="btn btn-default" id="printBtn">Print</button>
+				  <button class="btn btn-default" id="downloadBtn">Download</button>
                 </p>
               </div>
             </div>
@@ -133,3 +133,7 @@
   </div>
 </div>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js" integrity="sha512-rDbVu5s98lzXZsmJoMa0DjHNE+RwPJACogUCLyq3Xxm2kJO6qsQwjbE5NDk2DqmlKcxDirCnU1wAzVLe12IM3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/vfs_fonts.js" integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/pdf.js"></script>
