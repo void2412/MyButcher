@@ -21,7 +21,8 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace("/userprofile");
     } else {
-      alert(response.statusText);
+		const errorText = await response.json()
+      alert(errorText.message);
     }
   }
 };
